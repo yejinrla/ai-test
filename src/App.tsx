@@ -1,13 +1,18 @@
 import { Outlet } from "react-router-dom";
-import Navigation from "./components/Navigation";
+
 import "./App.css";
+import { StyledEngineProvider, ThemeProvider } from "@mui/material";
+import { theme } from "./theme";
 
 function App() {
   return (
-    <div className="App">
-      <Navigation />
-      <Outlet />
-    </div>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <div className="App">
+          <Outlet />
+        </div>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 }
 
