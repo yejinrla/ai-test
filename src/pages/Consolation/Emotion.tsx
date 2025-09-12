@@ -1,11 +1,9 @@
 /**
  * 정서적 위로 (M)
  */
-import { useEffect, useState, useCallback } from "react";
-import { Typography, Button, Grid } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { useConsolationStore } from "../../stores/consolationStore";
-import { useAnswers } from "../../stores/useAnswer";
+import { useEffect, useState } from "react";
+import { Typography, Grid } from "@mui/material";
+
 import UXReview from "./UXReview";
 import ChatbotMessage from "./ChatbotMessage";
 
@@ -20,28 +18,6 @@ const Emotion = () => {
   const [botReplied, setBotReplied] = useState(false);
   const [typed, setTyped] = useState("");
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
-
-  const navigate = useNavigate();
-  const getNextRoutes = useConsolationStore((s) => s.getNextRoutes);
-  const visit = useConsolationStore((s) => s.visit);
-
-  const goRandomPage = useCallback(() => {
-    const nextRoutes = getNextRoutes();
-
-    const answerArray = Object.entries(answers).map(([key, value]) => ({
-      id: `M${key}`,
-      answer: value,
-    }));
-    useAnswers.getState().add(answerArray);
-
-    if (nextRoutes.length === 0) {
-      navigate("/epilogue");
-      return;
-    }
-    const route = nextRoutes[Math.floor(Math.random() * nextRoutes.length)];
-    visit(route);
-    navigate(route);
-  }, [getNextRoutes, visit, navigate]);
 
   const fadeInStyle = {
     animation: "fadeIn 0.5s",
@@ -71,7 +47,6 @@ const Emotion = () => {
         clearTimeout(timeout);
       };
     } else {
-      console.log("타이핑 끝");
       // 타이핑 끝나면 1초 후 봇 답변
       const timeout = setTimeout(() => {
         setBotReplied(true);
@@ -86,6 +61,9 @@ const Emotion = () => {
         <Typography gutterBottom className="title">
           정서적 챗봇
         </Typography>
+        <Typography className="explanation">
+          다음은 정서적 위로를 제공하는 챗봇과의 대화입니다.
+        </Typography>
         <ChatbotMessage
           botText={botText}
           userTyping={userTyping}
@@ -95,16 +73,7 @@ const Emotion = () => {
           fadeInStyle={fadeInStyle}
           // userColor, botColor 필요시 오버라이드
         />
-        <UXReview answers={answers} setAnswers={setAnswers} />
-        <Button
-          variant="contained"
-          sx={{ py: 1, px: 3, mt: 2 }}
-          onClick={() => {
-            goRandomPage();
-          }}
-        >
-          다음
-        </Button>
+        <UXReview answers={answers} setAnswers={setAnswers} page="M" />
       </Grid>
     </Grid>
   );

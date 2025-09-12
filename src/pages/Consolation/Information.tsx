@@ -1,12 +1,12 @@
 /**
  * 정보적 위로 (I)
  */
-import { useEffect, useState, useCallback } from "react";
-import { Box, Typography, Button, Stack, Grid } from "@mui/material";
-import { useConsolationStore } from "../../stores/consolationStore";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Typography, Grid } from "@mui/material";
+
 import UXReview from "./UXReview";
-import { useAnswers } from "../../stores/useAnswer";
+
+import ChatbotMessage from "./ChatbotMessage";
 
 const botText = "안녕하세요. 챗봇 I입니다. 무엇을 도와드릴까요?";
 const userText =
@@ -18,29 +18,8 @@ const Information = () => {
   const [userTyping, setUserTyping] = useState(false);
   const [botReplied, setBotReplied] = useState(false);
   const [typed, setTyped] = useState("");
-  const navigate = useNavigate();
-  const getNextRoutes = useConsolationStore((s) => s.getNextRoutes);
-  const visit = useConsolationStore((s) => s.visit);
+
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
-
-  // 다음
-  const goRandomPage = useCallback(() => {
-    const nextRoutes = getNextRoutes();
-
-    const answerArray = Object.entries(answers).map(([key, value]) => ({
-      id: `I${key}`,
-      answer: value,
-    }));
-    useAnswers.getState().add(answerArray);
-
-    if (nextRoutes.length === 0) {
-      navigate("/epilogue");
-      return;
-    }
-    const route = nextRoutes[Math.floor(Math.random() * nextRoutes.length)];
-    visit(route);
-    navigate(route);
-  }, [answers, getNextRoutes, visit, navigate]);
 
   // 페이드인 애니메이션 스타일
   const fadeInStyle = {
@@ -80,88 +59,24 @@ const Information = () => {
   }, [typed, userTyping]);
 
   return (
-    <Grid sx={{ width: 620 }} justifyContent="center" alignContent={"center"}>
+    <Grid justifyContent="center" alignContent={"center"}>
       <Grid container direction="column" alignItems="center">
         <Typography gutterBottom className="title">
           정보적 챗봇
         </Typography>
-        <Grid
-          sx={{
-            width: 400,
-            p: 2,
-            minHeight: 400,
-            mb: 2,
-            border: "1px solid #ccc",
-            borderRadius: 2,
-            fontSize: "1.1rem",
-          }}
-        >
-          <Stack spacing={2}>
-            <Box
-              sx={{
-                alignSelf: "flex-start",
-                bgcolor: "grey.100",
-                color: "black",
-                px: 2,
-                py: 1,
-                borderRadius: 2,
-                maxWidth: "80%",
-                ...fadeInStyle,
-              }}
-            >
-              {botText}
-            </Box>
-
-            {/* 사용자 타이핑 효과만 보여줌 */}
-            {userTyping && (
-              <Box
-                sx={{
-                  alignSelf: "flex-end",
-                  bgcolor: "primary.light",
-                  color: "white",
-                  px: 2,
-                  py: 1,
-                  borderRadius: 2,
-                  maxWidth: "80%",
-                  fontFamily: "inherit",
-
-                  minHeight: "32px",
-                  letterSpacing: "0.5px",
-                }}
-              >
-                {typed}
-                <span style={{ opacity: 0.5 }}>|</span>
-              </Box>
-            )}
-            {/* 봇 답변 */}
-            {botReplied && (
-              <Box
-                sx={{
-                  alignSelf: "flex-start",
-                  bgcolor: "grey.100",
-                  color: "black",
-                  px: 2,
-                  py: 1,
-                  borderRadius: 2,
-                  maxWidth: "80%",
-                  ...fadeInStyle,
-                }}
-              >
-                {botReply}
-              </Box>
-            )}
-          </Stack>
-        </Grid>
-        <UXReview answers={answers} setAnswers={setAnswers} />
-        <Button
-          variant="contained"
-          sx={{ py: 1, px: 3, mt: 2 }}
-          onClick={() => {
-            goRandomPage();
-          }}
-        >
-          다음
-        </Button>
+        <Typography className="explanation" sx={{ mb: 1 }}>
+          다음은 정보적 위로를 제공하는 챗봇과의 대화입니다.
+        </Typography>
+        <ChatbotMessage
+          botText={botText}
+          userTyping={userTyping}
+          typed={typed}
+          botReply={botReply}
+          botReplied={botReplied}
+          fadeInStyle={fadeInStyle}
+          // userColor, botColor 필요시 오버라이드
+        />
+        <UXReview answers={answers} setAnswers={setAnswers} page="I" />
       </Grid>
     </Grid>
   );

@@ -6,7 +6,7 @@ export const theme = createTheme({
     primary: { main: "#3B82F6", dark: "#2563EB" },
     error: { main: "#DC2626" },
     background: { default: "#f8fafc", paper: "#f8fafc" },
-    text: { primary: "#111827", secondary: "#6B7280" },
+
     divider: "#E5E7EB",
   },
   shape: { borderRadius: 12 },

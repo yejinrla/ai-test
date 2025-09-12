@@ -8,6 +8,7 @@ import {
   Radio,
   Button,
   Grid,
+  Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { genderOptions, ageOptions, jobOptions } from "../constants/basic";
@@ -22,15 +23,38 @@ const About: React.FC = () => {
     job: "",
   });
 
+  const [errors, setErrors] = React.useState({
+    gender: false,
+    age: false,
+    job: false,
+  });
+
   const handleChange =
     (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      setForm((prev) => ({ ...prev, [key]: e.target.value }));
+      const value = e.target.value;
+      setForm((prev) => ({ ...prev, [key]: value }));
+      // 선택하면 해당 필드 에러 해제
+      setErrors((prev) => ({ ...prev, [key]: false }));
     };
 
   // 다음
   const handleNext = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // ⬇️ 비어있는 항목 에러 표시
+    const nextErrors = {
+      gender: !form.gender,
+      age: !form.age,
+      job: !form.job,
+    };
+    setErrors(nextErrors);
+
+    // 하나라도 에러면 진행 중단
+    if (nextErrors.gender || nextErrors.age || nextErrors.job) return;
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // 응답 저장
     useAnswers.getState().add([
       { id: "A1", answer: form.gender },
       { id: "A2", answer: form.age },
@@ -50,8 +74,19 @@ const About: React.FC = () => {
         </p>
 
         <form onSubmit={handleNext}>
-          <Stack spacing={4} sx={{ textAlign: "left", mt: 4, width: "500px" }}>
-            <FormControl required className="question">
+          <Stack
+            spacing={4}
+            sx={{
+              textAlign: "left",
+              mt: 4,
+              width: "500px",
+            }}
+          >
+            <FormControl
+              required
+              className="question"
+              sx={{ borderColor: errors.gender ? "red !important" : "inherit" }}
+            >
               <FormLabel sx={{ fontSize: "20px", mb: 1 }}>1. 성별</FormLabel>
               <RadioGroup
                 row
@@ -67,17 +102,22 @@ const About: React.FC = () => {
                   />
                 ))}
               </RadioGroup>
+              {errors?.gender && (
+                <Typography sx={{ color: "red", mt: 0.5 }}>
+                  성별을 선택해주세요!
+                </Typography>
+              )}
             </FormControl>
 
             <FormControl
               required
-              sx={{
-                border: "1px solid #ccc",
-                borderRadius: "8px",
-                padding: "16px",
-              }}
+              className="question"
+              sx={{ borderColor: errors.age ? "red !important" : "inherit" }}
             >
               <FormLabel sx={{ fontSize: "20px", mb: 1 }}>2. 연령대</FormLabel>
+              <Typography variant="body2" sx={{ mb: 1, color: "gray" }}>
+                (만 나이 기준)
+              </Typography>
               <RadioGroup value={form.age} onChange={handleChange("age")}>
                 {ageOptions.map((opt) => (
                   <FormControlLabel
@@ -88,15 +128,17 @@ const About: React.FC = () => {
                   />
                 ))}
               </RadioGroup>
+              {errors?.age && (
+                <Typography sx={{ color: "red", mt: 0.5 }}>
+                  연령대를 선택해주세요!
+                </Typography>
+              )}
             </FormControl>
 
             <FormControl
               required
-              sx={{
-                border: "1px solid #ccc",
-                borderRadius: "8px",
-                padding: "16px",
-              }}
+              className="question"
+              sx={{ borderColor: errors.job ? "red !important" : "inherit" }}
             >
               <FormLabel sx={{ fontSize: "20px", mb: 1 }}>3. 직업</FormLabel>
               <RadioGroup value={form.job} onChange={handleChange("job")}>
@@ -109,6 +151,11 @@ const About: React.FC = () => {
                   />
                 ))}
               </RadioGroup>
+              {errors?.job && (
+                <Typography sx={{ color: "red", mt: 0.5 }}>
+                  직업을 선택해주세요!
+                </Typography>
+              )}
             </FormControl>
           </Stack>
 

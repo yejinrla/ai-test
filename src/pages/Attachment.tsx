@@ -11,6 +11,7 @@ import {
   TableRow,
   TableCell,
   TableBody,
+  Divider,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { attachmentQuestions, likertLabels } from "../constants/attachment";
@@ -18,6 +19,7 @@ import { useAnswers } from "../stores/useAnswer";
 
 export default function AttachmentSurvey() {
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
   const handleChange = (id: string, value: string) => {
     setAnswers((prev) => ({ ...prev, [id]: value }));
@@ -26,6 +28,12 @@ export default function AttachmentSurvey() {
   // 다음
   const handleNext = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // 모든 문항 응답했는지 확인
+    if (Object.keys(answers).length !== attachmentQuestions.length) {
+      setError(true);
+      return;
+    }
 
     const answerArray = Object.entries(answers).map(([key, value]) => ({
       id: key,
@@ -45,6 +53,7 @@ export default function AttachmentSurvey() {
         다음은 귀하의 애착유형에 관한 문항입니다. <br />
         해당하는 항목을 선택해주시길 바랍니다.
       </p>
+      <Divider sx={{ mb: 2, borderColor: "grey.400", borderBottomWidth: 2 }} />
       <TableContainer sx={{ mb: 4 }}>
         <Table>
           <TableHead>
@@ -52,7 +61,7 @@ export default function AttachmentSurvey() {
               <TableCell sx={{ fontSize: "20px", textAlign: "center" }}>
                 질문
               </TableCell>
-              {[1, 2, 3, 4, 5].map((score) => (
+              {[1, 2, 3, 4, 5, 6, 7].map((score) => (
                 <TableCell key={score} align="center">
                   <Box
                     display="flex"
@@ -97,7 +106,7 @@ export default function AttachmentSurvey() {
                     {q.id}. {q.text}
                   </Typography>
                 </TableCell>
-                {[1, 2, 3, 4, 5].map((score) => (
+                {[1, 2, 3, 4, 5, 6, 7].map((score) => (
                   <TableCell key={score} align="center">
                     <Radio
                       checked={answers[q.id] === String(score)}
@@ -112,7 +121,11 @@ export default function AttachmentSurvey() {
           </TableBody>
         </Table>
       </TableContainer>
-
+      {error && (
+        <Typography sx={{ color: "red", mt: 0.5, mb: 2 }}>
+          모든 문항에 응답해주세요!
+        </Typography>
+      )}
       <Grid>
         <Button
           type="submit"

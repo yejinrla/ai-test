@@ -14,5 +14,9 @@ export const ageOptions = [
 
 export const jobOptions = [
   { value: "student", label: "학생" },
-  { value: "employed", label: "직장인" },
+  { value: "office", label: "사무직" },
+  { value: "technical", label: "기술, 생산직" },
+  { value: "service", label: "서비스직" },
+  { value: "professional", label: "전문직" },
+  { value: "other", label: "기타" },
 ];

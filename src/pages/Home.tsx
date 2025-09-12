@@ -1,9 +1,14 @@
-import { Button, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import React from "react";
 
 const Home: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+    <Grid
+      sx={{ margin: 3 }}
+      alignItems="center"
+      justifyContent="center"
+      container
+    >
       <div className="text-center">
         <Typography variant="h4" sx={{ mb: 2 }}>
           안녕하세요!
@@ -22,11 +27,11 @@ const Home: React.FC = () => {
           응답 내용은 연구 및 통계 목적으로만 사용되며, <br /> 개인식별정보는
           수집하지 않고 모든 응답은 익명으로 처리됩니다.
         </div>
-        <Button variant="contained" sx={{ py: 1, px: 3, mt: 3 }} href="/basic">
+        <Button variant="contained" sx={{ py: 1, px: 3, mt: 4 }} href="/basic">
           다음
         </Button>
       </div>
-    </div>
+    </Grid>
   );
 };
 

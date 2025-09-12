@@ -9,8 +9,8 @@ export const Friendness = [
 export const Effectiveness = [
   { id: "D1", text: "AI 챗봇의 위로는 효과적이다." },
   { id: "D2", text: "AI 챗봇의 위로는 도움이 되었다. " },
-  { id: "D3", text: "AI 챗봇의 위로는 유익했다." },
-  { id: "D4", text: "AI 챗봇의 위로는 적절했다." },
+  // { id: "D3", text: "AI 챗봇의 위로는 유익했다." },
+  { id: "D3", text: "AI 챗봇의 위로는 적절했다." },
 ];
 
 // 지속 사용 의도
