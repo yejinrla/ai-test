@@ -71,22 +71,50 @@ export default function AttachmentSurvey() {
 
           <Grid
             container
-            sx={{ mt: 3 }}
-            alignItems="flex-end"
-            justifyContent="center"
+            sx={{
+              mt: 3,
+              flexDirection: { xs: "column", sm: "row" },
+              alignItems: { xs: "stretch", sm: "flex-end" },
+            }}
           >
-            <Typography sx={{ mb: 1.25 }}>전혀 그렇지 않다</Typography>
+            {/* 왼쪽 라벨 */}
+            <Typography
+              sx={{
+                mb: { xs: 1, sm: 1.25 },
+                mr: { xs: 0, sm: 2 },
+                textAlign: { xs: "left", sm: "center" },
+                width: { xs: "100%", sm: "auto" },
+                minWidth: { sm: 110 },
+              }}
+            >
+              전혀 그렇지 않다
+            </Typography>
+            {/* 라디오 버튼 그룹 */}
             <RadioGroup
               row
               value={answers[q.id] || ""}
               onChange={(e) => handleChange(q.id, e.target.value)}
-              sx={{ gap: 1, ml: 1, mr: 1 }}
+              sx={{
+                flex: 1,
+                gap: 1,
+                ml: { xs: 0, sm: 1 },
+                mr: { xs: 0, sm: 1 },
+                justifyContent: "space-between",
+                width: "100%",
+              }}
             >
               {[1, 2, 3, 4, 5, 6, 7].map((score) => (
                 <FormControlLabel
                   key={score}
                   value={String(score)}
-                  control={<Radio />}
+                  control={
+                    <Radio
+                      sx={{
+                        width: { xs: "34px", sm: "50px" },
+                        height: { xs: "24px", sm: "45px" },
+                      }}
+                    />
+                  }
                   sx={{ margin: 0 }}
                   label={
                     <Box>
@@ -104,7 +132,19 @@ export default function AttachmentSurvey() {
                 />
               ))}
             </RadioGroup>
-            <Typography sx={{ mb: 1.25 }}>매우 그렇다</Typography>
+            {/* 오른쪽 라벨 */}
+            <Typography
+              sx={{
+                mb: { xs: 1, sm: 1 },
+                ml: { xs: 0, sm: 2 },
+                mt: { xs: 1, sm: 0 },
+                textAlign: { xs: "right", sm: "center" },
+                width: { xs: "100%", sm: "auto" },
+                minWidth: { sm: 90 },
+              }}
+            >
+              매우 그렇다
+            </Typography>
           </Grid>
         </Paper>
       ))}

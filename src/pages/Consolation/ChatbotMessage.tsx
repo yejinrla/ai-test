@@ -25,12 +25,14 @@ const ChatbotMessage: React.FC<ChatbotMessageProps> = ({
   <Stack
     spacing={2}
     sx={{
-      width: 450,
+      width: { xs: "100%", sm: 450 },
       mt: 2,
       border: "1px solid #ccc",
       borderRadius: 2,
-      fontSize: "1.1rem",
-      p: 2,
+      fontSize: { xs: "1rem", sm: "1.1rem" },
+      p: { xs: 1, sm: 2 },
+      maxWidth: { xs: "100vw", sm: 450 },
+      boxSizing: "border-box",
     }}
   >
     {/* 챗봇 인사 */}
@@ -42,7 +44,8 @@ const ChatbotMessage: React.FC<ChatbotMessageProps> = ({
         px: 2,
         py: 1,
         borderRadius: 2,
-        maxWidth: "80%",
+        maxWidth: { xs: "95%", sm: "80%" },
+        wordBreak: "break-word",
         ...fadeInStyle,
       }}
     >
@@ -58,10 +61,11 @@ const ChatbotMessage: React.FC<ChatbotMessageProps> = ({
           px: 2,
           py: 1,
           borderRadius: 2,
-          maxWidth: "80%",
+          maxWidth: { xs: "95%", sm: "80%" },
           fontFamily: "inherit",
           minHeight: "32px",
           letterSpacing: "0.5px",
+          wordBreak: "break-word",
         }}
       >
         {typed}
@@ -78,7 +82,8 @@ const ChatbotMessage: React.FC<ChatbotMessageProps> = ({
           px: 2,
           py: 1,
           borderRadius: 2,
-          maxWidth: "80%",
+          maxWidth: { xs: "95%", sm: "80%" },
+          wordBreak: "break-word",
           ...fadeInStyle,
         }}
       >

@@ -86,9 +86,9 @@ const UXReview = ({ answers, setAnswers, page }: UXReviewProps) => {
     <Grid>
       <Stack spacing={4} sx={{ textAlign: "left", mt: 4, width: "650px" }}>
         {allQuestions.map((section, idx) => (
-          <Grid container gap={4} key={idx} className="question">
+          <Grid container gap={4} key={idx}>
             {section.items.map((q) => (
-              <Box key={q.id}>
+              <Box key={q.id} className="question-box">
                 <Typography sx={{ fontSize: "20px", mb: 1 }}>
                   {q.id + ". " + q.text}
                 </Typography>

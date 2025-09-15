@@ -102,7 +102,7 @@ const Chatbot = () => {
         <Grid>
           <Stack spacing={4} sx={{ textAlign: "left", mt: 4, width: "550px" }}>
             {/* G1. 지난 1개월 사용 빈도 */}
-            <Box className="question">
+            <Box className="question-box">
               <Typography sx={{ fontSize: "20px", mb: 1 }}>
                 G1. 지난 1개월 동안 챗봇 사용 빈도
               </Typography>
@@ -128,7 +128,7 @@ const Chatbot = () => {
             </Box>
 
             {/* G2. 주 사용 목적 (복수 선택) */}
-            <Box className="question">
+            <Box className="question-box">
               <Typography sx={{ fontSize: "20px", mb: 1 }}>
                 G2. 주 사용 목적 (복수 선택 가능)
               </Typography>
@@ -159,7 +159,7 @@ const Chatbot = () => {
             </Box>
 
             {/* G3. 챗봇 고민상담 경험 */}
-            <Box className="question">
+            <Box className="question-box">
               <Typography sx={{ fontSize: "20px", mb: 1 }}>
                 G3. AI 챗봇에게 개인적 고민/감정을 이야기해 본 적이 있나요?
               </Typography>
