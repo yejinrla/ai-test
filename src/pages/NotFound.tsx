@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const NotFound: React.FC = () => {
   return (
@@ -12,12 +13,12 @@ const NotFound: React.FC = () => {
           요청하신 페이지가 존재하지 않습니다.
         </p>
         <div className="space-x-4">
-          <a
-            href="/"
+          <Link
+            to="/"
             className="inline-block bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
           >
             홈으로 돌아가기
-          </a>
+          </Link>
         </div>
       </div>
     </div>

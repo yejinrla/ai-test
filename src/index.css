@@ -92,8 +92,35 @@ button:focus-visible {
   line-height: 1.4;
 }
 
-.question {
+.question-box {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 24px;
+}
+
+.question {
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+
+/* 모바일 대응 (600px 이하 화면) */
+@media (max-width: 600px) {
+  .title {
+    font-size: 1.8em; /* 제목 글씨 축소 */
+  }
+
+  .explanation {
+    font-size: 1em; /* 설명 글씨 축소 */
+    line-height: 1.5; /* 모바일에서는 줄간격 조금 넓게 */
+  }
+
+  .question-box {
+    padding: 16px; /* 질문 박스 패딩 축소 */
+  }
+
+  .question {
+    font-size: 18px; /* 질문 글씨 축소 */
+    margin: 8px;
+  }
 }

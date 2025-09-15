@@ -10,8 +10,9 @@ import {
   Stack,
   Grid,
   Button,
+  TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   Friendness,
   Effectiveness,
@@ -42,6 +43,7 @@ const UXReview = ({ answers, setAnswers, page }: UXReviewProps) => {
   const visit = useConsolationStore((s) => s.visit);
   const [sectionErrors, setSectionErrors] = useState<boolean>(false);
 
+  const commentRef = useRef("");
   /**
    * 다음
    */
@@ -58,10 +60,15 @@ const UXReview = ({ answers, setAnswers, page }: UXReviewProps) => {
       id: `${page}${key}`,
       answer: value,
     }));
+
+    if (commentRef.current.trim()) {
+      answerArray.push({ id: `${page}C1`, answer: commentRef.current });
+    }
     useAnswers.getState().add(answerArray);
+    console.log(useAnswers.getState().items);
 
     if (nextRoutes.length === 0) {
-      navigate("/epilogue");
+      navigate("/chatbot");
       return;
     }
     const route = nextRoutes[Math.floor(Math.random() * nextRoutes.length)];
@@ -104,6 +111,17 @@ const UXReview = ({ answers, setAnswers, page }: UXReviewProps) => {
           </Grid>
         ))}
       </Stack>
+      {/* 주관식 입력 칸 */}
+      <TextField
+        label="챗봇 유형에 대한 의견을 자유롭게 작성해주세요. (예: 좋았던 점, 아쉬웠던 점 등)"
+        multiline
+        rows={2}
+        fullWidth
+        onChange={(e) => {
+          commentRef.current = e.target.value; // 🔑 state 대신 ref에 저장
+        }}
+        sx={{ mt: 4 }}
+      />
       {sectionErrors && (
         <Grid container alignItems="center" gap={1} sx={{ mt: 2 }}>
           <ErrorIcon sx={{ color: "red" }} />

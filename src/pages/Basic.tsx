@@ -65,7 +65,7 @@ const About: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex items-center justify-center">
+    <div>
       <div className="text-center max-w-2xl mx-auto px-4">
         <h1 className="title">인구통계학적 특성</h1>
         <p className="explanation">
@@ -79,15 +79,15 @@ const About: React.FC = () => {
             sx={{
               textAlign: "left",
               mt: 4,
-              width: "500px",
+              width: { xs: "100%", sm: "400px", md: "500px" },
             }}
           >
             <FormControl
               required
-              className="question"
+              className="question-box"
               sx={{ borderColor: errors.gender ? "red !important" : "inherit" }}
             >
-              <FormLabel sx={{ fontSize: "20px", mb: 1 }}>1. 성별</FormLabel>
+              <FormLabel className="question">1. 성별</FormLabel>
               <RadioGroup
                 row
                 value={form.gender}
@@ -111,10 +111,10 @@ const About: React.FC = () => {
 
             <FormControl
               required
-              className="question"
+              className="question-box"
               sx={{ borderColor: errors.age ? "red !important" : "inherit" }}
             >
-              <FormLabel sx={{ fontSize: "20px", mb: 1 }}>2. 연령대</FormLabel>
+              <FormLabel className="question">2. 연령대</FormLabel>
               <Typography variant="body2" sx={{ mb: 1, color: "gray" }}>
                 (만 나이 기준)
               </Typography>
@@ -137,10 +137,10 @@ const About: React.FC = () => {
 
             <FormControl
               required
-              className="question"
+              className="question-box"
               sx={{ borderColor: errors.job ? "red !important" : "inherit" }}
             >
-              <FormLabel sx={{ fontSize: "20px", mb: 1 }}>3. 직업</FormLabel>
+              <FormLabel className="question">3. 직업</FormLabel>
               <RadioGroup value={form.job} onChange={handleChange("job")}>
                 {jobOptions.map((opt) => (
                   <FormControlLabel

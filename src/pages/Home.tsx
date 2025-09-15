@@ -1,7 +1,15 @@
 import { Button, Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAnswers } from "../stores/useAnswer";
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    useAnswers.getState().clear(); // 처음에 답변 초기화
+  }, []);
+
   return (
     <Grid
       sx={{ margin: 3 }}
@@ -24,10 +32,14 @@ const Home: React.FC = () => {
             사용자의 애착유형을 중심으로 -” <br />{" "}
           </Typography>
           를 탐구하기 위한 연구입니다. <br /> <br />
-          응답 내용은 연구 및 통계 목적으로만 사용되며, <br /> 개인식별정보는
-          수집하지 않고 모든 응답은 익명으로 처리됩니다.
+          응답은 연구와 통계 목적으로만 사용되며, <br /> 개인식별정보는 수집하지
+          않고 모든 응답은 익명으로 처리됩니다.
         </div>
-        <Button variant="contained" sx={{ py: 1, px: 3, mt: 4 }} href="/basic">
+        <Button
+          variant="contained"
+          sx={{ py: 1, px: 3, mt: 4 }}
+          onClick={() => navigate("/basic")}
+        >
           다음
         </Button>
       </div>
