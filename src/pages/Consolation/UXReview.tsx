@@ -84,25 +84,55 @@ const UXReview = ({ answers, setAnswers, page }: UXReviewProps) => {
 
   return (
     <Grid>
-      <Stack spacing={4} sx={{ textAlign: "left", mt: 4, width: "650px" }}>
+      <Stack
+        spacing={4}
+        sx={{
+          textAlign: "left",
+          mt: 4,
+          width: { xs: "90%", sm: "650px" }, // 모바일에서는 전체 너비 사용
+          px: { xs: 2, sm: 0 }, // 모바일에서는 패딩 추가
+        }}
+      >
         {allQuestions.map((section, idx) => (
-          <Grid container gap={4} key={idx}>
+          <Grid
+            container
+            gap={4}
+            key={idx}
+            sx={{
+              flexDirection: { xs: "column", sm: "row" }, // 모바일에서는 세로 정렬
+            }}
+          >
             {section.items.map((q) => (
               <Box key={q.id} className="question-box">
-                <Typography sx={{ fontSize: "20px", mb: 1 }}>
+                <Typography className="question">
                   {q.id + ". " + q.text}
                 </Typography>
                 <RadioGroup
                   row
                   value={answers[String(q.id)] || ""}
                   onChange={handleChange(q.id)}
+                  sx={{
+                    flexWrap: { xs: "wrap", sm: "nowrap" }, // 모바일에서 라디오 버튼 줄바꿈
+                  }}
                 >
                   {[1, 2, 3, 4, 5].map((score) => (
                     <FormControlLabel
                       key={score}
                       value={String(score)}
-                      control={<Radio />}
+                      control={
+                        <Radio
+                          sx={{
+                            width: { xs: "34px", sm: "auto" },
+                            height: { xs: "34px", sm: "auto" },
+                          }}
+                        />
+                      }
                       label={likertLabels5[score]}
+                      sx={{
+                        "& .MuiFormControlLabel-label": {
+                          fontSize: { xs: "13px", sm: "14px" }, // 모바일에서 글자 크기 축소
+                        },
+                      }}
                     />
                   ))}
                 </RadioGroup>
@@ -110,29 +140,39 @@ const UXReview = ({ answers, setAnswers, page }: UXReviewProps) => {
             ))}
           </Grid>
         ))}
+        {/* 주관식 입력 칸 */}
+        <TextField
+          label="챗봇 유형에 대한 의견을 자유롭게 작성해주세요. (예: 좋았던 점, 아쉬웠던 점 등)"
+          multiline
+          rows={2}
+          fullWidth
+          onChange={(e) => {
+            commentRef.current = e.target.value;
+          }}
+          sx={{
+            mt: 4,
+            fontSize: { xs: "14px", sm: "16px" }, // 모바일에서 글자 크기 축소
+          }}
+        />
       </Stack>
-      {/* 주관식 입력 칸 */}
-      <TextField
-        label="챗봇 유형에 대한 의견을 자유롭게 작성해주세요. (예: 좋았던 점, 아쉬웠던 점 등)"
-        multiline
-        rows={2}
-        fullWidth
-        onChange={(e) => {
-          commentRef.current = e.target.value; // 🔑 state 대신 ref에 저장
-        }}
-        sx={{ mt: 4 }}
-      />
+
       {sectionErrors && (
         <Grid container alignItems="center" gap={1} sx={{ mt: 2 }}>
           <ErrorIcon sx={{ color: "red" }} />
-          <Typography sx={{ color: "red" }}>
+          <Typography
+            sx={{ color: "red", fontSize: { xs: "14px", sm: "16px" } }}
+          >
             모든 문항에 대한 답을 선택해 주세요!
           </Typography>
         </Grid>
       )}
       <Button
         variant="contained"
-        sx={{ py: 1, px: 3, mt: 2 }}
+        sx={{
+          py: 1,
+          px: 3,
+          mt: 2,
+        }}
         onClick={() => {
           goRandomPage();
         }}

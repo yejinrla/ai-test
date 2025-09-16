@@ -10,7 +10,7 @@ import {
   FormControlLabel,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { attachmentQuestions, likertLabels } from "../constants/attachment";
+import { attachmentQuestions } from "../constants/attachment";
 import { useAnswers } from "../stores/useAnswer";
 
 export default function AttachmentSurvey() {
@@ -80,6 +80,7 @@ export default function AttachmentSurvey() {
             {/* 왼쪽 라벨 */}
             <Typography
               sx={{
+                display: { xs: "none", sm: "block" },
                 mb: { xs: 1, sm: 1.25 },
                 mr: { xs: 0, sm: 2 },
                 textAlign: { xs: "left", sm: "center" },
@@ -112,6 +113,7 @@ export default function AttachmentSurvey() {
                       sx={{
                         width: { xs: "34px", sm: "50px" },
                         height: { xs: "24px", sm: "45px" },
+                        color: "#00000026",
                       }}
                     />
                   }
@@ -132,19 +134,34 @@ export default function AttachmentSurvey() {
                 />
               ))}
             </RadioGroup>
-            {/* 오른쪽 라벨 */}
-            <Typography
-              sx={{
-                mb: { xs: 1, sm: 1 },
-                ml: { xs: 0, sm: 2 },
-                mt: { xs: 1, sm: 0 },
-                textAlign: { xs: "right", sm: "center" },
-                width: { xs: "100%", sm: "auto" },
-                minWidth: { sm: 90 },
-              }}
-            >
-              매우 그렇다
-            </Typography>
+            <Grid container flexDirection="row" justifyContent="space-between">
+              <Typography
+                display={{ xs: "block", sm: "none" }}
+                sx={{
+                  mb: { xs: 1, sm: 1 },
+                  ml: { xs: 0, sm: 2 },
+                  mt: { xs: 1, sm: 0 },
+                  minWidth: { sm: 90 },
+                  fontSize: { xs: "13px", sm: "14px" },
+                }}
+              >
+                전혀 그렇지 않다
+              </Typography>
+              {/* 오른쪽 라벨 */}
+              <Typography
+                sx={{
+                  mb: { xs: 1, sm: 1 },
+                  ml: { xs: 0, sm: 2 },
+                  mt: { xs: 1, sm: 0 },
+                  textAlign: { xs: "right", sm: "center" },
+                  width: { xs: "auto%", sm: "auto" },
+                  minWidth: { sm: 90 },
+                  fontSize: { xs: "12px", sm: "14px" },
+                }}
+              >
+                매우 그렇다
+              </Typography>
+            </Grid>
           </Grid>
         </Paper>
       ))}

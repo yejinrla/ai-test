@@ -89,114 +89,119 @@ const Chatbot = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex items-center justify-center">
-      <div className="text-center max-w-2xl mx-auto px-4">
-        <h1 className="title">챗봇 사용 경험</h1>
-        <p className="explanation">
-          다음은 챗봇 사용 경험에 관한 문항입니다. <br />
-          해당하는 항목을 선택해주시길 바랍니다.
-        </p>
-        <p>
-          마지막 질문입니다! <br />
-        </p>
-        <Grid>
-          <Stack spacing={4} sx={{ textAlign: "left", mt: 4, width: "550px" }}>
-            {/* G1. 지난 1개월 사용 빈도 */}
-            <Box className="question-box">
-              <Typography sx={{ fontSize: "20px", mb: 1 }}>
-                G1. 지난 1개월 동안 챗봇 사용 빈도
-              </Typography>
-              <RadioGroup
-                value={answers?.["G1"] || ""}
-                onChange={handleChange("G1")}
-              >
-                {[
-                  "매일 여러 번",
-                  "하루 1회",
-                  "주 2–3회",
-                  "주 1회 이하",
-                  "사용 안 함",
-                ].map((label, idx) => (
-                  <FormControlLabel
-                    key={idx}
-                    value={label}
-                    control={<Radio />}
-                    label={label}
-                  />
-                ))}
-              </RadioGroup>
-            </Box>
-
-            {/* G2. 주 사용 목적 (복수 선택) */}
-            <Box className="question-box">
-              <Typography sx={{ fontSize: "20px", mb: 1 }}>
-                G2. 주 사용 목적 (복수 선택 가능)
-              </Typography>
+    <div className="text-center max-w-2xl mx-auto px-4">
+      <h1 className="title">챗봇 사용 경험</h1>
+      <p className="explanation">
+        다음은 챗봇 사용 경험에 관한 문항입니다. <br />
+        해당하는 항목을 선택해주시길 바랍니다.
+      </p>
+      <p>
+        마지막 질문입니다! <br />
+      </p>
+      <Grid>
+        <Stack
+          spacing={4}
+          sx={{
+            textAlign: "left",
+            mt: 4,
+            width: { xs: "100%", sm: "400px", md: "500px" },
+          }}
+        >
+          {/* G1. 지난 1개월 사용 빈도 */}
+          <Box className="question-box">
+            <Typography className="question">
+              G1. 지난 1개월 동안 챗봇 사용 빈도
+            </Typography>
+            <RadioGroup
+              value={answers?.["G1"] || ""}
+              onChange={handleChange("G1")}
+            >
               {[
-                "정보검색·요약",
-                "번역",
-                "코딩·디버깅",
-                "글쓰기·이메일",
-                "일정·학습계획",
-                "감정·고민상담",
-                "기타",
+                "매일 여러 번",
+                "하루 1회",
+                "주 2–3회",
+                "주 1회 이하",
+                "사용 안 함",
               ].map((label, idx) => (
                 <FormControlLabel
                   key={idx}
                   value={label}
-                  control={
-                    <Checkbox
-                      checked={
-                        Array.isArray(answers?.["G2"]) &&
-                        (answers?.["G2"] as string[]).includes(label)
-                      }
-                      onChange={handleMultiChange("G2")}
-                    />
-                  }
+                  control={<Radio />}
                   label={label}
                 />
               ))}
-            </Box>
+            </RadioGroup>
+          </Box>
 
-            {/* G3. 챗봇 고민상담 경험 */}
-            <Box className="question-box">
-              <Typography sx={{ fontSize: "20px", mb: 1 }}>
-                G3. AI 챗봇에게 개인적 고민/감정을 이야기해 본 적이 있나요?
-              </Typography>
-              <RadioGroup
-                value={answers["G3"] || ""}
-                onChange={handleChange("G3")}
-              >
-                <FormControlLabel value="예" control={<Radio />} label="예" />
-                <FormControlLabel
-                  value="아니오"
-                  control={<Radio />}
-                  label="아니오"
-                />
-              </RadioGroup>
-            </Box>
-          </Stack>
+          {/* G2. 주 사용 목적 (복수 선택) */}
+          <Box className="question-box">
+            <Typography className="question">
+              G2. 주 사용 목적 (복수 선택 가능)
+            </Typography>
+            {[
+              "정보검색·요약",
+              "번역",
+              "코딩·디버깅",
+              "글쓰기·이메일",
+              "일정·학습계획",
+              "감정·고민상담",
+              "기타",
+            ].map((label, idx) => (
+              <FormControlLabel
+                key={idx}
+                value={label}
+                control={
+                  <Checkbox
+                    checked={
+                      Array.isArray(answers?.["G2"]) &&
+                      (answers?.["G2"] as string[]).includes(label)
+                    }
+                    onChange={handleMultiChange("G2")}
+                  />
+                }
+                label={label}
+              />
+            ))}
+          </Box>
 
-          {/* 에러 메시지 */}
-          {sectionErrors && (
-            <Grid container alignItems="center" gap={1} sx={{ mt: 2 }}>
-              <ErrorIcon sx={{ color: "red" }} />
-              <Typography sx={{ color: "red" }}>
-                모든 문항에 답변해 주세요!
-              </Typography>
-            </Grid>
-          )}
+          {/* G3. 챗봇 고민상담 경험 */}
+          <Box className="question-box">
+            <Typography className="question">
+              G3. AI 챗봇에게 개인적 고민/감정을 이야기해 본 적이 있나요?
+            </Typography>
+            <RadioGroup
+              value={answers["G3"] || ""}
+              onChange={handleChange("G3")}
+            >
+              <FormControlLabel value="예" control={<Radio />} label="예" />
+              <FormControlLabel
+                value="아니오"
+                control={<Radio />}
+                label="아니오"
+              />
+            </RadioGroup>
+          </Box>
+        </Stack>
 
-          {/* 다음 버튼 */}
-          <Button
-            variant="contained"
-            sx={{ py: 1, px: 3, mt: 2 }}
-            onClick={goNext}
-          >
-            제출
-          </Button>
-        </Grid>
-      </div>
+        {/* 에러 메시지 */}
+        {sectionErrors && (
+          <Grid container alignItems="center" gap={1} sx={{ mt: 2 }}>
+            <ErrorIcon sx={{ color: "red" }} />
+            <Typography sx={{ color: "red" }}>
+              모든 문항에 답변해 주세요!
+            </Typography>
+          </Grid>
+        )}
+
+        {/* 다음 버튼 */}
+        <Button
+          variant="contained"
+          sx={{ py: 1, px: 3, mt: 2 }}
+          onClick={goNext}
+        >
+          제출
+        </Button>
+      </Grid>
     </div>
   );
 };

@@ -25,13 +25,13 @@ const ChatbotMessage: React.FC<ChatbotMessageProps> = ({
   <Stack
     spacing={2}
     sx={{
-      width: { xs: "100%", sm: 450 },
+      width: "100%",
       mt: 2,
       border: "1px solid #ccc",
       borderRadius: 2,
-      fontSize: { xs: "1rem", sm: "1.1rem" },
+      fontSize: { xs: "0.9rem", sm: "1.1rem" }, // 모바일에서 글자 크기 축소
       p: { xs: 1, sm: 2 },
-      maxWidth: { xs: "100vw", sm: 450 },
+      maxWidth: { xs: "90%", sm: 450 }, // 모바일에서 전체 너비 사용
       boxSizing: "border-box",
     }}
   >
@@ -44,8 +44,9 @@ const ChatbotMessage: React.FC<ChatbotMessageProps> = ({
         px: 2,
         py: 1,
         borderRadius: 2,
-        maxWidth: { xs: "95%", sm: "80%" },
+        maxWidth: { xs: "90%", sm: "80%" }, // 모바일에서 너비 조정
         wordBreak: "break-word",
+        fontSize: { xs: "0.85rem", sm: "1rem" }, // 모바일에서 글자 크기 축소
         ...fadeInStyle,
       }}
     >
@@ -61,11 +62,12 @@ const ChatbotMessage: React.FC<ChatbotMessageProps> = ({
           px: 2,
           py: 1,
           borderRadius: 2,
-          maxWidth: { xs: "95%", sm: "80%" },
+          maxWidth: { xs: "80%", sm: "70%" }, // 모바일에서 너비를 더 줄임
           fontFamily: "inherit",
           minHeight: "32px",
           letterSpacing: "0.5px",
           wordBreak: "break-word",
+          fontSize: { xs: "0.85rem", sm: "1rem" }, // 모바일에서 글자 크기 축소
         }}
       >
         {typed}
@@ -82,8 +84,9 @@ const ChatbotMessage: React.FC<ChatbotMessageProps> = ({
           px: 2,
           py: 1,
           borderRadius: 2,
-          maxWidth: { xs: "95%", sm: "80%" },
+          maxWidth: { xs: "90%", sm: "80%" }, // 모바일에서 너비 조정
           wordBreak: "break-word",
+          fontSize: { xs: "0.85rem", sm: "1rem" }, // 모바일에서 글자 크기 축소
           ...fadeInStyle,
         }}
       >
