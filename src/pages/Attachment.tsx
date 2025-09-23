@@ -5,13 +5,13 @@ import {
   Radio,
   Button,
   Grid,
-  Paper,
   RadioGroup,
   FormControlLabel,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { attachmentQuestions, likertLabels } from "../constants/attachment";
+import { attachmentQuestions } from "../constants/attachment";
 import { useAnswers } from "../stores/useAnswer";
+import ErrorIcon from "@mui/icons-material/Error";
 
 export default function AttachmentSurvey() {
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
@@ -46,16 +46,16 @@ export default function AttachmentSurvey() {
       <Typography variant="h5" gutterBottom className="title">
         애착유형
       </Typography>
-      <p className="explanation">
+      <Typography className="explanation" sx={{ mb: 4 }}>
         다음은 귀하의 애착유형에 관한 문항입니다. <br />
-        해당하는 항목을 선택해주시길 바랍니다.
-      </p>
+        주변 사람들과의 관계에서 자신을 가장 잘 나타내는 항목을 선택해주시길
+        바랍니다.
+      </Typography>
 
       {/* 카드형 질문 목록 */}
       {attachmentQuestions.map((q) => (
-        <Paper
+        <Grid
           key={q.id}
-          elevation={2}
           className="question-box"
           sx={{
             p: 2,
@@ -110,7 +110,7 @@ export default function AttachmentSurvey() {
                   control={
                     <Radio
                       sx={{
-                        width: { xs: "34px", sm: "50px" },
+                        width: { xs: "20px", sm: "50px" },
                         height: { xs: "24px", sm: "45px" },
                       }}
                     />
@@ -146,13 +146,16 @@ export default function AttachmentSurvey() {
               매우 그렇다
             </Typography>
           </Grid>
-        </Paper>
+        </Grid>
       ))}
 
       {error && (
-        <Typography sx={{ color: "red", mt: 0.5, mb: 2 }}>
-          모든 문항에 응답해주세요!
-        </Typography>
+        <Grid container alignItems="center" gap={1} sx={{ mt: 2 }}>
+          <ErrorIcon sx={{ color: "red" }} />
+          <Typography sx={{ color: "red" }}>
+            모든 문항에 대한 답을 선택해 주세요!
+          </Typography>
+        </Grid>
       )}
 
       <Grid>

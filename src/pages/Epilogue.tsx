@@ -3,17 +3,89 @@
  * 사용자의 애착유형과 선호하는 위로 유형을 알려준다.
  */
 
-import { Button } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useAnswers } from "../stores/useAnswer";
 
 const Epilogue = () => {
   const navigate = useNavigate();
 
+  function classifyLevel(z: number): "Low" | "High" {
+    if (z <= 1) return "Low";
+    return "High";
+  }
+
+  const calculateAttachmentType = () => {
+    // 여기에 애착유형 계산 로직 추가 (현재는 더미 데이터)
+    const answers = useAnswers.getState().items;
+
+    // 규준 평균 & 표준편차 (Wei et al., 2007)
+    const anxietyMean = 21.73;
+    const anxietySD = 7.04;
+    const avoidanceMean = 18.24;
+    const avoidanceSD = 6.36;
+
+    // 불안 점수 계산
+    const anxietyIds = ["B2", "B4", "B6", "B8", "B10", "B12"];
+    const anxietyReverseIds = ["B8"];
+    const anxietyScores = anxietyIds.map((id) => {
+      const item = answers.find((a) => a.id === id);
+      if (!item) return 0;
+      const score = Number(item.answer);
+      return anxietyReverseIds.includes(id) ? 8 - score : score;
+    });
+    const anxietyTotal = anxietyScores.reduce((a, b) => a + b, 0);
+
+    // 회피 점수 계산
+    const avoidanceIds = ["B1", "B3", "B5", "B7", "B9", "B11"];
+    const avoidanceReverseIds = ["B1", "B5", "B9"];
+    const avoidanceScores = avoidanceIds.map((id) => {
+      const item = answers.find((a) => a.id === id);
+      if (!item) return 0;
+      const score = Number(item.answer);
+      return avoidanceReverseIds.includes(id) ? 8 - score : score;
+    });
+    const avoidanceTotal = avoidanceScores.reduce((a, b) => a + b, 0);
+
+    // Z점수 계산
+    const anxietyZ = (anxietyTotal - anxietyMean) / anxietySD;
+    const avoidanceZ = (avoidanceTotal - avoidanceMean) / avoidanceSD;
+
+    const anxietyLevel = classifyLevel(anxietyZ);
+    const avoidanceLevel = classifyLevel(avoidanceZ);
+
+    let attachmentType = "";
+
+    if (anxietyLevel === "Low" && avoidanceLevel === "Low") {
+      attachmentType = "안정형";
+    } else if (anxietyLevel === "High" && avoidanceLevel === "Low") {
+      attachmentType = "불안형";
+    } else if (anxietyLevel === "Low" && avoidanceLevel === "High") {
+      attachmentType = "회피형";
+    } else if (anxietyLevel === "High" && avoidanceLevel === "High") {
+      attachmentType = "두려운 회피형";
+    }
+
+    return attachmentType;
+  };
+
+  const attachmentType = calculateAttachmentType();
+
   return (
-    <div>
+    <Grid sx={{ color: "text.primary", textAlign: "center", mt: 4 }}>
       <h1>❤️</h1>
-      <p>설문에 참여해주셔서 감사합니다!</p>
-      <p>이 세상 모든 연구자들 화이팅 💪</p>
+      <Typography>
+        당신의 애착유형은 <b>{attachmentType}</b>입니다!
+      </Typography>
+      <br />
+      가장 선호하는 위로 유형은{" "}
+      <b>
+        {useAnswers.getState().items.find((a) => a.id === "G1")?.answer}
+      </b>{" "}
+      이었군요 😁
+      <br />
+      <br />
+      <Typography>설문에 참여해주셔서 감사합니다!</Typography>
       <Button
         variant="contained"
         sx={{ py: 1, px: 3, mt: 2 }}
@@ -21,7 +93,7 @@ const Epilogue = () => {
       >
         처음으로
       </Button>
-    </div>
+    </Grid>
   );
 };
 export default Epilogue;

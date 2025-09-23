@@ -2,7 +2,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "../App";
 import Home from "../pages/Home";
 import Basic from "../pages/Basic";
-import NotFound from "../pages/NotFound";
 import Attachment from "../pages/Attachment";
 import Information from "../pages/Consolation/Information";
 import Encouragement from "../pages/Consolation/Encouragement";
@@ -10,6 +9,7 @@ import Emotion from "../pages/Consolation/Emotion";
 import Prologue from "../pages/Consolation/Prologue";
 import Epilogue from "../pages/Epilogue";
 import Chatbot from "../pages/Chatbot";
+import PreferType from "../pages/Consolation/PreferType";
 
 const router = createBrowserRouter(
   [
@@ -50,6 +50,10 @@ const router = createBrowserRouter(
           element: <Prologue />,
         },
         {
+          path: "consolation/prefertype",
+          element: <PreferType />,
+        },
+        {
           path: "chatbot",
           element: <Chatbot />,
         },
@@ -59,7 +63,7 @@ const router = createBrowserRouter(
         },
         {
           path: "*",
-          element: <NotFound />,
+          element: <Home />,
         },
       ],
     },

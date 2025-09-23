@@ -65,13 +65,13 @@ const About: React.FC = () => {
   };
 
   return (
-    <div>
+    <div style={{ color: "text.primary" }}>
       <div className="text-center max-w-2xl mx-auto px-4">
-        <h1 className="title">인구통계학적 특성</h1>
-        <p className="explanation">
+        <Typography className="title">인구통계학적 특성</Typography>
+        <Typography className="explanation">
           다음은 귀하의 인구통계학적 특성에 관한 문항입니다. <br />
           해당하는 항목을 선택해주시길 바랍니다.
-        </p>
+        </Typography>
 
         <form onSubmit={handleNext}>
           <Stack
@@ -83,7 +83,6 @@ const About: React.FC = () => {
             }}
           >
             <FormControl
-              required
               className="question-box"
               sx={{ borderColor: errors.gender ? "red !important" : "inherit" }}
             >
@@ -110,7 +109,6 @@ const About: React.FC = () => {
             </FormControl>
 
             <FormControl
-              required
               className="question-box"
               sx={{ borderColor: errors.age ? "red !important" : "inherit" }}
             >
@@ -136,7 +134,6 @@ const About: React.FC = () => {
             </FormControl>
 
             <FormControl
-              required
               className="question-box"
               sx={{ borderColor: errors.job ? "red !important" : "inherit" }}
             >

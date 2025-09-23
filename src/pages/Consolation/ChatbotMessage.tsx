@@ -10,6 +10,7 @@ interface ChatbotMessageProps {
   fadeInStyle?: object;
   userColor?: string;
   botColor?: string;
+  isFirst?: boolean; // 첫 라우트 여부 prop 추가
 }
 
 const ChatbotMessage: React.FC<ChatbotMessageProps> = ({
@@ -51,7 +52,7 @@ const ChatbotMessage: React.FC<ChatbotMessageProps> = ({
     >
       {botText}
     </Box>
-    {/* 사용자 타이핑 효과 */}
+    {/* 사용자 타이핑 효과: 첫 번째 라우트일 때만 */}
     {userTyping && (
       <Box
         sx={{
@@ -69,22 +70,23 @@ const ChatbotMessage: React.FC<ChatbotMessageProps> = ({
         }}
       >
         {typed}
-        <span style={{ opacity: 0.5 }}>|</span>
+        {/* <span style={{ opacity: 0.5 }}>|</span> */}
       </Box>
     )}
     {/* 챗봇 답변 */}
     {botReplied && botReply && (
       <Box
         sx={{
-          alignSelf: "flex-start",
           bgcolor: botColor,
           color: "black",
           px: 2,
           py: 1,
           borderRadius: 2,
-          maxWidth: { xs: "95%", sm: "80%" },
+          maxWidth: { xs: "95%", sm: "85%" },
           wordBreak: "break-word",
           ...fadeInStyle,
+          whiteSpace: "pre-line",
+          textAlign: "left",
         }}
       >
         {botReply}

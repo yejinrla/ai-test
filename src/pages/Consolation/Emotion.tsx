@@ -6,18 +6,17 @@ import { Typography, Grid } from "@mui/material";
 
 import UXReview from "./UXReview";
 import ChatbotMessage from "./ChatbotMessage";
+import { botReplies, userText } from "../../constants/consolation";
 
 const botText = "안녕하세요. 챗봇 M입니다. 무엇을 도와드릴까요?";
-const userText =
-  "나 요즘 너무 바빠서 정신이 없어. 할 일도 많고 마음의 여유가 없어서 힘들어.";
-const botReply =
-  "지금 너무 벅차고 힘들어서 마음이 많이 무거우실 것 같아요. 그냥 “열심히 하고 있다”는 말보다, 지금 느끼는 그 지침 자체를 제가 함께 느끼고 안아드리고 싶어요.";
+const botReply = botReplies[2].text;
 
 const Emotion = () => {
   const [userTyping, setUserTyping] = useState(false);
   const [botReplied, setBotReplied] = useState(false);
   const [typed, setTyped] = useState("");
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
+  const [showSurvey, setShowSurvey] = useState(false); // 추가
 
   const fadeInStyle = {
     animation: "fadeIn 0.5s",
@@ -55,6 +54,13 @@ const Emotion = () => {
     }
   }, [typed, userTyping]);
 
+  // 챗봇 답변이 다 뜬 뒤 설문 표시
+  useEffect(() => {
+    if (botReplied) {
+      setTimeout(() => setShowSurvey(true), 1500); // 1초 후 설문 표시
+    }
+  }, [botReplied]);
+
   return (
     <Grid justifyContent="center" alignContent={"center"}>
       <Grid container direction="column" alignItems="center">
@@ -73,7 +79,9 @@ const Emotion = () => {
           fadeInStyle={fadeInStyle}
           // userColor, botColor 필요시 오버라이드
         />
-        <UXReview answers={answers} setAnswers={setAnswers} page="M" />
+        {showSurvey && (
+          <UXReview answers={answers} setAnswers={setAnswers} page="M" />
+        )}
       </Grid>
     </Grid>
   );

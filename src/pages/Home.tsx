@@ -12,7 +12,7 @@ const Home: React.FC = () => {
 
   return (
     <Grid
-      sx={{ margin: 3 }}
+      sx={{ margin: 3, color: "text.primary" }}
       alignItems="center"
       justifyContent="center"
       container
@@ -21,7 +21,7 @@ const Home: React.FC = () => {
         <Typography variant="h4" sx={{ mb: 2 }}>
           안녕하세요!
         </Typography>
-        <div className="text-lg text-gray-600 mb-8">
+        <div>
           바쁜 일정 중에도 본 설문에 참여해 주셔서 진심으로 감사드립니다.😊
           <br />
           <br /> 본 조사는

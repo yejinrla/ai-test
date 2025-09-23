@@ -7,19 +7,17 @@ import { Typography, Grid } from "@mui/material";
 import UXReview from "./UXReview";
 
 import ChatbotMessage from "./ChatbotMessage";
+import { botReplies, userText } from "../../constants/consolation";
 
 const botText = "안녕하세요. 챗봇 I입니다. 무엇을 도와드릴까요?";
-const userText =
-  "나 요즘 너무 바빠서 정신이 없어. 할 일도 많고 마음의 여유가 없어서 힘들어.";
-const botReply =
-  '마음이 바쁘고 할 일이 많을 때, 자신을 돌아보며 하루를 점검하는 시간을 갖거나 좋아하는 일에 몰입하는 것도 마음의 평온을 가져오는 데 도움이 됩니다. 감정을 억누르기보다는 솔직히 인정하고, 하루에 한 번이라도 자신에게 "괜찮다"라고 말해주는 것도 정서적 안정에 긍정적입니다.';
 
+const botReply = botReplies[0].text;
 const Information = () => {
   const [userTyping, setUserTyping] = useState(false);
   const [botReplied, setBotReplied] = useState(false);
   const [typed, setTyped] = useState("");
-
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
+  const [showSurvey, setShowSurvey] = useState(false); // 추가
 
   // 페이드인 애니메이션 스타일
   const fadeInStyle = {
@@ -58,6 +56,13 @@ const Information = () => {
     }
   }, [typed, userTyping]);
 
+  // 챗봇 답변이 다 뜬 뒤 설문 표시
+  useEffect(() => {
+    if (botReplied) {
+      setTimeout(() => setShowSurvey(true), 1500); // 1초 후 설문 표시
+    }
+  }, [botReplied]);
+
   return (
     <Grid justifyContent="center" alignContent={"center"}>
       <Grid container direction="column" alignItems="center">
@@ -76,7 +81,9 @@ const Information = () => {
           fadeInStyle={fadeInStyle}
           // userColor, botColor 필요시 오버라이드
         />
-        <UXReview answers={answers} setAnswers={setAnswers} page="I" />
+        {showSurvey && (
+          <UXReview answers={answers} setAnswers={setAnswers} page="I" />
+        )}
       </Grid>
     </Grid>
   );

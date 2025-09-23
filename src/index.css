@@ -7,6 +7,13 @@
 
 @font-face {
   font-family: "Pretendard";
+  font-weight: 500;
+  font-style: normal;
+  src: url("./assets/fonts/Pretendard-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Pretendard";
   font-weight: 700;
   font-style: normal;
   src: url("./assets/fonts/Pretendard-Bold.woff2") format("woff2");
@@ -84,7 +91,7 @@ button:focus-visible {
 /* form title */
 .title {
   font-weight: 700;
-  font-size: 2.5em;
+  font-size: 2em;
 }
 
 .explanation {
@@ -100,8 +107,9 @@ button:focus-visible {
 
 .question {
   font-size: 20px;
-  font-weight: 400;
-  margin-bottom: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: "#111827";
 }
 
 /* 모바일 대응 (600px 이하 화면) */
@@ -121,6 +129,5 @@ button:focus-visible {
 
   .question {
     font-size: 18px; /* 질문 글씨 축소 */
-    margin: 8px;
   }
 }
