@@ -10,9 +10,10 @@ import { useAnswers } from "../stores/useAnswer";
 const Epilogue = () => {
   const navigate = useNavigate();
 
-  function classifyLevel(z: number): "Low" | "High" {
-    if (z <= 1) return "Low";
-    return "High";
+  function classifyLevel(z: number): "Low" | "Average" | "High" {
+    if (z <= -0.5) return "Low";
+    if (z >= 0.5) return "High";
+    return "Average";
   }
 
   const calculateAttachmentType = () => {
@@ -56,11 +57,11 @@ const Epilogue = () => {
 
     let attachmentType = "";
 
-    if (anxietyLevel === "Low" && avoidanceLevel === "Low") {
+    if (anxietyLevel !== "High" && avoidanceLevel !== "High") {
       attachmentType = "안정형";
-    } else if (anxietyLevel === "High" && avoidanceLevel === "Low") {
+    } else if (anxietyLevel === "High" && avoidanceLevel !== "High") {
       attachmentType = "불안형";
-    } else if (anxietyLevel === "Low" && avoidanceLevel === "High") {
+    } else if (anxietyLevel !== "High" && avoidanceLevel === "High") {
       attachmentType = "회피형";
     } else if (anxietyLevel === "High" && avoidanceLevel === "High") {
       attachmentType = "두려운 회피형";
