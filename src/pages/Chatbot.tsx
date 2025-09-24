@@ -8,6 +8,7 @@ import {
   Button,
   Checkbox,
   Grid,
+  TextField,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +22,7 @@ const Chatbot = () => {
   const [answers, setAnswers] = useState<{ [key: string]: string | string[] }>(
     {}
   );
+  const [info, setInfo] = useState("");
 
   const handleChange =
     (id: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,6 +52,7 @@ const Chatbot = () => {
       { id: "H1", answer: answers["H1"] as string },
       { id: "H2", answer: (answers["H2"] as string[]).join(", ") },
       { id: "H3", answer: answers["H3"] as string },
+      { id: "H4", answer: info },
     ]);
 
     const { data, error } = await supabase
@@ -256,6 +259,18 @@ const Chatbot = () => {
               </RadioGroup>
             </Box>
           </Stack>
+          <TextField
+            label="성함과 연락처를 남겨주시면, 추첨을 통해 기프티콘을 보내 드립니다! (선택 사항)"
+            multiline
+            fullWidth
+            value={info}
+            onChange={(e) => setInfo(e.target.value)}
+            sx={{
+              mt: 4,
+              fontSize: { xs: "14px", sm: "16px" },
+              "& .MuiInputBase-input": { fontSize: { xs: "14px", sm: "16px" } },
+            }}
+          />
 
           {sectionErrors && (
             <Grid container alignItems="center" gap={1} sx={{ mt: 2 }}>
