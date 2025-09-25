@@ -156,7 +156,7 @@ export default function AttachmentSurvey() {
                   textAlign: { xs: "right", sm: "center" },
                   width: { xs: "auto%", sm: "auto" },
                   minWidth: { sm: 90 },
-                  fontSize: { xs: "12px", sm: "14px" },
+                  fontSize: { xs: "12px", sm: "16px" },
                 }}
               >
                 매우 그렇다

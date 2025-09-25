@@ -75,7 +75,7 @@ const About: React.FC = () => {
 
         <form onSubmit={handleNext}>
           <Stack
-            spacing={4}
+            spacing={3}
             sx={{
               textAlign: "left",
               mt: 4,
@@ -112,10 +112,12 @@ const About: React.FC = () => {
               className="question-box"
               sx={{ borderColor: errors.age ? "red !important" : "inherit" }}
             >
-              <FormLabel className="question">2. 연령대</FormLabel>
-              <Typography variant="body2" sx={{ mb: 1, color: "gray" }}>
-                (만 나이 기준)
-              </Typography>
+              <Grid container alignItems="center" spacing={1}>
+                <FormLabel className="question">2. 연령대 </FormLabel>
+                <Typography variant="body2" sx={{ mb: 1, color: "gray" }}>
+                  (만 나이 기준)
+                </Typography>
+              </Grid>
               <RadioGroup value={form.age} onChange={handleChange("age")}>
                 {ageOptions.map((opt) => (
                   <FormControlLabel

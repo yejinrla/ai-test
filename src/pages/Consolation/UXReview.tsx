@@ -92,7 +92,7 @@ const UXReview = ({ answers, setAnswers, page }: UXReviewProps) => {
     <Fade in={show} timeout={600}>
       <Grid>
         <Typography sx={{ fontSize: "20px", mb: 2, mt: 4 }}>
-          챗봇 {page}에 대한 경험을 평가해주세요 😊
+          위의 챗봇에 대한 경험을 평가해주세요 😊
         </Typography>
         <Stack
           spacing={4}

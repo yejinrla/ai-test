@@ -11,6 +11,12 @@
   font-style: normal;
   src: url("./assets/fonts/Pretendard-Medium.woff2") format("woff2");
 }
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 600;
+  font-style: normal;
+  src: url("./assets/fonts/Pretendard-SemiBold.woff2") format("woff2");
+}
 
 @font-face {
   font-family: "Pretendard";
@@ -95,8 +101,9 @@ button:focus-visible {
 }
 
 .explanation {
-  font-size: 1.125em;
+  font-size: 16px;
   line-height: 1.4;
+  margin-top: 16px;
 }
 
 .question-box {
