@@ -260,15 +260,16 @@ const Chatbot = () => {
             </Box>
           </Stack>
           <TextField
-            label="성함과 연락처를 남겨주시면, 추첨을 통해 기프티콘을 보내 드립니다! (선택 사항)"
+            label="(선택) 성함과 연락처를 남겨주시면, 추첨을 통해 기프티콘을 보내 드립니다!"
             multiline
             fullWidth
             value={info}
             onChange={(e) => setInfo(e.target.value)}
             sx={{
               mt: 4,
-              fontSize: { xs: "14px", sm: "16px" },
-              "& .MuiInputBase-input": { fontSize: { xs: "14px", sm: "16px" } },
+              "& .MuiInputLabel-root": {
+                fontSize: { xs: "12px", sm: "16px" },
+              },
             }}
           />
 
