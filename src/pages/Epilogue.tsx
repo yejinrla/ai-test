@@ -27,19 +27,20 @@ const Epilogue = () => {
     const avoidanceSD = 6.36;
 
     // 불안 점수 계산
-    const anxietyIds = ["B2", "B4", "B6", "B8", "B10", "B12"];
-    const anxietyReverseIds = ["B8"];
+    const anxietyIds = ["B02", "B04", "B06", "B08", "B10", "B12"];
+    const anxietyReverseIds = ["B08"];
     const anxietyScores = anxietyIds.map((id) => {
       const item = answers.find((a) => a.id === id);
       if (!item) return 0;
       const score = Number(item.answer);
       return anxietyReverseIds.includes(id) ? 8 - score : score;
     });
+
     const anxietyTotal = anxietyScores.reduce((a, b) => a + b, 0);
 
     // 회피 점수 계산
-    const avoidanceIds = ["B1", "B3", "B5", "B7", "B9", "B11"];
-    const avoidanceReverseIds = ["B1", "B5", "B9"];
+    const avoidanceIds = ["B01", "B03", "B05", "B07", "B09", "B11"];
+    const avoidanceReverseIds = ["B01", "B05", "B09"];
     const avoidanceScores = avoidanceIds.map((id) => {
       const item = answers.find((a) => a.id === id);
       if (!item) return 0;
