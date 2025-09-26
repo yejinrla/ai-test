@@ -64,6 +64,11 @@ const Encouragement = () => {
         </Typography>
         <Typography className="explanation">
           다음은 격려적 위로를 제공하는 챗봇과의 대화입니다.
+          <br />
+          <br />
+          격려적 위로는 상대방이 스스로 힘을 낼 수 있도록
+          <br />
+          <b>긍정적인 자극·희망·용기</b>를 주는 위로 방식입니다.
         </Typography>
         <ChatbotMessage
           botText={botText}

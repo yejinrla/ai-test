@@ -69,6 +69,10 @@ const Emotion = () => {
         </Typography>
         <Typography className="explanation">
           다음은 정서적 위로를 제공하는 챗봇과의 대화입니다.
+          <br />
+          <br />
+          정서적 위로는 상대방의 감정을 <br />
+          <b>공감하고 인정해 주는 것</b>에 초점을 맞춘 위로 방식입니다.
         </Typography>
         <ChatbotMessage
           botText={botText}

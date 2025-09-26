@@ -70,7 +70,11 @@ const Information = () => {
           정보적 챗봇
         </Typography>
         <Typography className="explanation" sx={{ mb: 1 }}>
-          다음은 정보적 위로를 제공하는 챗봇과의 대화입니다.
+          다음은 정보적 위로를 제공하는 챗봇과의 대화입니다. <br />
+          <br />
+          정보적 위로는 상대방의 상황을 객관적으로 이해하고, <br />
+          문제 해결이나 상황 이해에 도움이 되는 <b>정보·지식·조언</b>을 제공하는
+          위로 방식입니다.
         </Typography>
         <ChatbotMessage
           botText={botText}

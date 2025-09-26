@@ -27,7 +27,7 @@ const ChatbotMessage: React.FC<ChatbotMessageProps> = ({
     spacing={2}
     sx={{
       width: "100%",
-      mt: 2,
+      mt: 4,
       border: "1px solid #ccc",
       borderRadius: 2,
       fontSize: { xs: "0.9rem", sm: "1.1rem" }, // 모바일에서 글자 크기 축소
