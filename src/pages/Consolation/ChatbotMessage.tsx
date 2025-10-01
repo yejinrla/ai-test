@@ -14,7 +14,7 @@ interface ChatbotMessageProps {
 }
 
 const ChatbotMessage: React.FC<ChatbotMessageProps> = ({
-  botText,
+  // botText,
   userTyping,
   typed,
   botReply,
@@ -37,7 +37,7 @@ const ChatbotMessage: React.FC<ChatbotMessageProps> = ({
     }}
   >
     {/* 챗봇 인사 */}
-    <Box
+    {/* <Box
       sx={{
         alignSelf: "flex-start",
         bgcolor: botColor,
@@ -52,7 +52,7 @@ const ChatbotMessage: React.FC<ChatbotMessageProps> = ({
       }}
     >
       {botText}
-    </Box>
+    </Box> */}
     {/* 사용자 타이핑 효과: 첫 번째 라우트일 때만 */}
     {userTyping && (
       <Box

@@ -9,7 +9,7 @@ import UXReview from "./UXReview";
 import ChatbotMessage from "./ChatbotMessage";
 import { botReplies, userText } from "../../constants/consolation";
 
-const botText = "안녕하세요. 챗봇 I입니다. 무엇을 도와드릴까요?";
+const botText = "안녕하세요. 무엇을 도와드릴까요?";
 
 const botReply = botReplies[0].text;
 const Information = () => {
